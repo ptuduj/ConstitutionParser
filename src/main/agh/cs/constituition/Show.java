@@ -30,7 +30,7 @@ public class Show {
                 else if (i <= length && args[i].equals("-a")) {
                     Article art = d.findArticle(args[++i]);
 
-                    if ((++i) <= length && ( args[i].equals("-pr") ||( (args[i].equals("-sp")) && (d instanceof Act)))) {
+                    if ((++i) < length && ( args[i].equals("-pr") ||( (args[i].equals("-sp")) && (d instanceof Act)))) {
                         String parNum = args[i];
                         Paragraph par = art.findParagraph(args[++i]);
                         Subparagraph sp = null;
@@ -67,8 +67,11 @@ public class Show {
 
                             int iend = args[i].indexOf("-");
                             String beginning = args[i].substring(0, iend);
-                            String end = args[i].substring( iend+1 );
-                            if (Integer.valueOf(beginning) > Integer.valueOf(end)) {out.println("Incorrect argument!"); break;}
+                            String end="";
+
+                            if ((args[i].length()-iend-1) != 0) end=args[i].substring( iend+1 );
+                            if (end.equals("")) {out.println("Incorrect argument!"); break;}
+                            if (!end.equals("") && Integer.valueOf(beginning) > Integer.valueOf(end)) {out.println("Incorrect argument!"); break;}
 
                             List<Article> artciles = d.art;
                             boolean ifStart= false;
@@ -86,7 +89,7 @@ public class Show {
                     }
                 }
 
-                else if (i <= length && args[i].equals("-t") && i==length) {    // display all table of contents
+                else if (i == length && args[i].equals("-t") ) {    // display all table of contents
 
                     for (int j = 0; j < 3; j++) {                    // display only 3 lines of introduction
                         out.println(d.introduction.get(j)); }
@@ -111,20 +114,27 @@ public class Show {
                         else out.println("Chapter doesn't exist!");
 
                     }
-                    // display table of contents for this section
+                    // display section
                     else {
-                        if (sec != null) sec.tableOfContents();
+                        if (sec != null) sec.print();
                         else out.println("Section doesn't exist!"); }
                 }
 
-                else if (i <= length && args[i].equals("-c")) {   // print chapter
+                else if (i+1 == length && args[i].equals("-c")) {   // print chapter
                     if (d instanceof Constituition) {
                         Chapter c = ((Constituition) d).findChapter(args[++i]);
-                        if (c != null) {
-                            c.print(); }
+                        if (c != null) { c.print(); }
                         else  out.println("Chapter doesn't exist!");
                     }
                 }
+
+                else if (i+1 == length && args[i].equals("-ts") && d instanceof Act) {   // table of contents for section
+
+                        Section s = ((Act) d).findSection(args[++i]);
+                        if (s != null) { s.tableOfContents(); }
+                        else  out.println("Section doesn't exist!");
+                }
+
 
                 else {
                     out.println("Incorrect argummet!");

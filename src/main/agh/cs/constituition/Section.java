@@ -40,5 +40,10 @@ public class Section {          // dział
            for (Chapter c: this.chapters)  c.tableOfContents();
     }
 
+    public void print() {
+        out.println("DZIAŁ " + this.number);      // number and title of section
+        out.println(this.title);
+        for (Chapter c: this.chapters)  c.print();
+    }
 
 }
