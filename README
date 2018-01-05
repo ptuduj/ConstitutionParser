@@ -1,0 +1,16 @@
+Arguments:
+
+-p              path                                                   -p C:\Users\lenovo\Desktop\parser\PO\uokik.txt
+
+-t              view table of contents                                 -p C:\Users\lenovo\Desktop\parser\PO\uokik.txt -t
+
+-s              show table of contents for a specific section          -p C:\Users\lenovo\Desktop\parser\PO\uokik.txt -s III
+
+-a              show the article                                       -p C:\Users\lenovo\Desktop\parser\PO\uokik.txt -a 2
+
+-a -pr          show the paragraph                                     -p C:\Users\lenovo\Desktop\parser\PO\uokik.txt -a 2 -pr 2
+
+-a -pr -sp      show the subparagraph                                  -p C:\Users\lenovo\Desktop\parser\PO\uokik.txt -a 2 -pr 2 -sp 2
+-a -sp          show the subparagraph                                  -p C:\Users\lenovo\Desktop\parser\PO\uokik.txt -a 4 -sp 1
+
+-a -pr -sp -l   show letter                                            -p C:\Users\lenovo\Desktop\parser\PO\uokik.txt -a 2 -pr 2 -sp 2 -l a
